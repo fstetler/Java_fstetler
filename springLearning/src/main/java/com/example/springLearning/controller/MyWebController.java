@@ -20,9 +20,7 @@ public class MyWebController {
     @GetMapping("/mineral")
     @ResponseBody
     public Mineral mineral() {
-        Mineral mineral = new Mineral();
-        mineral.setMineralType("Gold");
-        mineral.setId(1);
-        return mineral;
+
+        return new Mineral(1, "gold");
     }
 }
