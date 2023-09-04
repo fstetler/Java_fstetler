@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
 
@@ -12,7 +13,7 @@ public class Main {
     }
 
     public static void listOfPossibleWords() throws IOException {
-        File allEnglishWordsFile = new File("C:\\Programming\\NewJava\\WordleSolver\\english-words\\words.txt");
+        File allEnglishWordsFile = new File("C:\\Programming\\Java_fstetler\\WordleSolver\\english-words\\words.txt");
         Scanner scanner = new Scanner(allEnglishWordsFile);
 
         List<String> listEnglishWords = new ArrayList<>();
@@ -64,7 +65,47 @@ public class Main {
             listEnglishWords = listWords;
         }
 
+        System.out.println("Write the letters that you know are part of the word, in no specific order");
+        Scanner scannedLettersIncluded = new Scanner(System.in);
+        String lettersIncluded = scannedLettersIncluded.nextLine();
+
+        List<String> charsIncluded = new ArrayList<>();
+        for (int i = 0; i < lettersIncluded.length(); i++) {
+            if (lettersIncluded.charAt(i) != ' ') {
+                charsIncluded.add(String.valueOf(lettersIncluded.charAt(i)));
+            }
+        }
+
+        List<String> finalWordList = new ArrayList<>();
+
+        for (String word : listEnglishWords) {
+            int count = 0;
+            for (String c : charsIncluded) {
+                if (word.contains(c.toUpperCase())) {
+                    count += 1;
+                }
+            }
+
+            if (count == charsIncluded.size()) {
+                finalWordList.add(word);
+            }
+        }
+
+
+
+
+        System.out.println("hey");
+//        List<String> finalListWords;
+//        for (String c: charsIncluded) {
+//            finalListWords = new ArrayList<>();
+//            for (String word : listEnglishWords) {
+//                if (word.contains(c)) {
+//
+//                };
+//            }
+//        }
+
         System.out.println("These are the possible words for your wordle problem:");
-        System.out.println(listEnglishWords);
+        System.out.println(finalWordList);
     }
 }
