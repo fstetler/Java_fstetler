@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 @Service
@@ -34,12 +35,11 @@ public class MovieService {
 
     public Movie addMovie(Movie movie) {
 
-        List<Movie> listOfMovies = movieRepository.findAll();
-        for (Movie m : listOfMovies) {
+        movieRepository.findAll().forEach(m -> {
             if (m.getId() == movie.getId()) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The ID is already in use");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The ID is used already");
             }
-        }
+        });
 
         return movieRepository.save(movie);
     }
