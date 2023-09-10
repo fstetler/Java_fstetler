@@ -1,7 +1,6 @@
 package com.movieLibrary.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -10,13 +9,17 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "movie")
 public class Movie {
 
     @Id
-    private Integer id;
+    @Column(name = "ID")
+    private int id;
 
+    @Column(name = "MOVIE_NAME")
     private String movieName;
 
-    private Double movieRating;
+    @Column(name = "MOVIE_RATING")
+    private double movieRating;
 
 }
