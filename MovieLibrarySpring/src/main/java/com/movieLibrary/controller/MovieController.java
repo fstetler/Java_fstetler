@@ -28,6 +28,11 @@ public class MovieController {
         return movieService.getAllMovies();
     }
 
+    @GetMapping(path = "/getMovieById/{id}")
+    public Movie getMovieById(@PathVariable("id") Movie movie) {
+        return movieService.getMovieById(movie.getId());
+    }
+
     @GetMapping("/getTest")
     public Movie getTest() {
         return new Movie(1, "shitmovie", 1.1);
@@ -37,5 +42,6 @@ public class MovieController {
     public Movie addMovie(@RequestBody Movie movie) {
         return movieService.addMovie(movie);
     }
+
 
 }

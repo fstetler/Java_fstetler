@@ -33,8 +33,12 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
-    public Movie addMovie(Movie movie) {
+    public Movie getMovieById(Integer id) {
+        return movieRepository.getReferenceById(id);
+    }
 
+
+    public Movie addMovie(Movie movie) {
         movieRepository.findAll().forEach(m -> {
             if (m.getId() == movie.getId()) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The ID is used already");
