@@ -1,19 +1,14 @@
 package com.movieLibrary.service;
 
 import com.movieLibrary.model.Movie;
+import com.movieLibrary.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import com.movieLibrary.repository.MovieRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 @Service
 public class MovieService {
@@ -48,5 +43,7 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
-
+    public void deleteMovieById(Movie movie) {
+        movieRepository.deleteById(movie.getId());
+    }
 }

@@ -1,7 +1,6 @@
 package com.movieLibrary.controller;
 
 import com.movieLibrary.model.Movie;
-import com.movieLibrary.repository.MovieRepository;
 import com.movieLibrary.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +42,8 @@ public class MovieController {
         return movieService.addMovie(movie);
     }
 
-
+    @DeleteMapping("/deleteMovieById/{id}")
+    public void deleteMovie(@PathVariable("id") Movie movie) {
+        movieService.deleteMovieById(movie);
+    }
 }
