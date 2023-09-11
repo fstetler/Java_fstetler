@@ -34,7 +34,7 @@ public class MovieController {
 
     @GetMapping("/getTest")
     public Movie getTest() {
-        return new Movie(1, "shitmovie", 1.1);
+        return movieService.getTest();
     }
 
     @PostMapping("/addMovie")
