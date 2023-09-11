@@ -91,20 +91,6 @@ public class Main {
             }
         }
 
-
-
-
-        System.out.println("hey");
-//        List<String> finalListWords;
-//        for (String c: charsIncluded) {
-//            finalListWords = new ArrayList<>();
-//            for (String word : listEnglishWords) {
-//                if (word.contains(c)) {
-//
-//                };
-//            }
-//        }
-
         System.out.println("These are the possible words for your wordle problem:");
         System.out.println(finalWordList);
     }
