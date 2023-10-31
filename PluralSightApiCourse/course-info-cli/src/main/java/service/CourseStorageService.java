@@ -6,7 +6,7 @@ import com.pluralsight.courseinfo.repository.CourseRepository;
 import java.util.List;
 
 public class CourseStorageService {
-    private static final String PS_BASE_URL = "https://app.plugalsight.com";
+    private static final String PS_BASE_URL = "https://app.pluralsight.com/library/";
 
     private final CourseRepository courseRepository;
 

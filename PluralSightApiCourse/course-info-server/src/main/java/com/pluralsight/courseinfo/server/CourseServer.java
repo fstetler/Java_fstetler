@@ -17,7 +17,6 @@ public class CourseServer {
         CourseRepository courseRepository = CourseRepository.openCourseRepository("./courses.db");
         ResourceConfig config = new ResourceConfig().register(new CourseResource(courseRepository));
 
-
         GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), config);
 
     }
