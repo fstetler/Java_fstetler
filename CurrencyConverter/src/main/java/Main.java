@@ -68,8 +68,8 @@ public class Main {
             String currencyInType = Objects.requireNonNull(fromCurrencyCombobox.getSelectedItem()).toString();
             String currencyOutType = Objects.requireNonNull(toCurrencyCombobox.getSelectedItem()).toString();
 
-            double currencyInConvertValue = Double.parseDouble(jsonNode.get("data").get(currencyInType).toString());
-            double currencyOutConvertValue = Double.parseDouble(jsonNode.get("data").get(currencyOutType).toString());
+            double currencyInConvertValue = Double.parseDouble(currencyExchangeFromUSD(currencyInType));
+            double currencyOutConvertValue = Double.parseDouble(currencyExchangeFromUSD(currencyOutType));
 
             double valueInTextfield = Double.parseDouble(inTextField.getText());
 
