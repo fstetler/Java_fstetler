@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class Main {
 
@@ -56,12 +57,25 @@ public class Main {
 
         JComboBox<String> toCurrencyCombobox = new JComboBox<>();
         toCurrencyCombobox.setBounds(750, 200, 100, 40);
+        for (int i = 0; i < numberOfCurrencies; i++) {
+            toCurrencyCombobox.addItem(listOfCurrencies.get(i));
+        }
 
         JButton convertButton = new JButton("Convert");
         convertButton.setBounds(850, 200, 100, 40);
         convertButton.addActionListener(e -> {
-            int value = Integer.parseInt(inTextField.getText()) * Integer.parseInt(currencyExchangeFromUSD(fromCurrencyCombobox.toString()));
-            convertedAmountLabel.setText(String.valueOf(value));
+
+            String currencyInType = Objects.requireNonNull(fromCurrencyCombobox.getSelectedItem()).toString();
+            String currencyOutType = Objects.requireNonNull(toCurrencyCombobox.getSelectedItem()).toString();
+
+            double currencyInConvertValue = Double.parseDouble(jsonNode.get("data").get(currencyInType).toString());
+            double currencyOutConvertValue = Double.parseDouble(jsonNode.get("data").get(currencyOutType).toString());
+
+            double valueInTextfield = Double.parseDouble(inTextField.getText());
+
+            convertedAmountLabel.setText(String.valueOf(valueInTextfield/currencyInConvertValue*currencyOutConvertValue));
+            convertedAmountLabel.validate();
+
         });
 
         JFrame frame = new JFrame();
