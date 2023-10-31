@@ -9,11 +9,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "movie")
+@Table(name = "movie_table")
 public class Movie {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "movie_id")
     private int id;
 
     @Column(name = "MOVIE_NAME")

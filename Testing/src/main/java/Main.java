@@ -7,6 +7,8 @@ import anotherPackage.ThreadClass;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.lang.Package;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class Main extends ThreadClass {
@@ -23,10 +25,24 @@ public class Main extends ThreadClass {
         Main main = new Main();
         main.start();
 
+        streamTester();
+
+    }
 
 
 
-//
+    public static void streamTester() {
+        List<Integer> intList = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
+
+        System.out.println(intList);
+
+        intList.stream().filter(i -> i < 5).filter(i -> i > 2).forEach(System.out::println);
+
+
+    }
+
+    public void readText() {
+        //
 //        GenericClass<Double, Integer> genericClass = new GenericClass(1.5, "hey", 1);
 //        genericClass.print();
 //
@@ -49,5 +65,7 @@ public class Main extends ThreadClass {
 
         return otherThingToShout;
     }
+
+
 
 }
