@@ -2,17 +2,90 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class Main {
 
-    public static String currencyExchangeFromEuro(String currency) {
-        JsonNode jsonNode = null;
+    static int numberOfCurrencies;
+    static JsonNode jsonNode;
+    static List<String> listOfCurrencies;
+
+
+    public static String currencyExchangeFromUSD(String currency) {
+        return jsonNode.get("data").get(currency).toString();
+    }
+
+    public static List<String> getListOfCurrencies() {
+        List<String> jsonNodeList = new ArrayList<>();
+
+        for (Iterator<String> it = jsonNode.get("data").fieldNames(); it.hasNext(); ) {
+            jsonNodeList.add(it.next());
+        }
+
+        return jsonNodeList;
+    }
+
+    public static void main(String [] args) {
+
+        jsonNode = getJsonNode();
+        listOfCurrencies = getListOfCurrencies();
+        numberOfCurrencies = getListOfCurrencies().size();
+
+        JLabel amountLabel = new JLabel("Amount: ");
+        amountLabel.setBounds(300, 200, 100, 40);
+
+        JTextField inTextField = new JTextField();
+        inTextField.setBounds(450, 200, 100, 40);
+
+        JComboBox<String> fromCurrencyCombobox = new JComboBox<>();
+        fromCurrencyCombobox.setBounds(550, 200, 100, 40);
+        for (int i = 0; i < numberOfCurrencies; i++) {
+            fromCurrencyCombobox.addItem(listOfCurrencies.get(i));
+        }
+
+        JLabel convertedAmountLabel = new JLabel();
+        convertedAmountLabel.setBounds(650, 200, 100, 40);
+
+        JComboBox<String> toCurrencyCombobox = new JComboBox<>();
+        toCurrencyCombobox.setBounds(750, 200, 100, 40);
+
+        JButton convertButton = new JButton("Convert");
+        convertButton.setBounds(850, 200, 100, 40);
+        convertButton.addActionListener(e -> {
+            int value = Integer.parseInt(inTextField.getText()) * Integer.parseInt(currencyExchangeFromUSD(fromCurrencyCombobox.toString()));
+            convertedAmountLabel.setText(String.valueOf(value));
+        });
+
+        JFrame frame = new JFrame();
+        frame.setSize(1000, 500);
+        frame.setLayout(null);
+        frame.setVisible(true);
+        frame.add(fromCurrencyCombobox);
+        frame.add(amountLabel);
+        frame.add(inTextField);
+        frame.add(convertedAmountLabel);
+        frame.add(toCurrencyCombobox);
+        frame.add(convertButton);
+
+
+
+        amountLabel.setVisible(true);
+
+    }
+
+    public static JsonNode getJsonNode() {
         try {
-            URL url = new URL("http://data.fixer.io/api/latest?access_key=119fe8fd6d661e9503632e6624a596d2&format=1");
+
+            URL url = new URL("https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_fnuqgMqt3xhbpkxPPoXKVMBN7DyNNJVzklDM4awC");
+//            URL url = new URL("http://data.fixer.io/api/latest?access_key=119fe8fd6d661e9503632e6624a596d2&format=1");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
@@ -32,45 +105,6 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return jsonNode.get("rates").get(currency).toString();
+        return jsonNode;
     }
-
-    public static void main(String [] args) {
-
-        JFrame frame = new JFrame();
-        JButton button1 = new JButton();
-        JComboBox<String> comboBox1 = new JComboBox<>();
-        JLabel label1 = new JLabel("Amount: ");
-        JLabel label2 = new JLabel();
-        JTextField textField1 = new JTextField();
-        JTextField textField2 =  new JTextField();
-        JComboBox<String> comboBox2 = new JComboBox<>();
-
-        frame.setLayout(null);
-        frame.setVisible(true);
-        frame.setSize(1000, 500);
-        button1.setBounds(130, 100, 100, 40);
-        comboBox1.setBounds(550, 200, 100, 40);
-        label1.setBounds(300, 200, 100, 40);
-        textField1.setBounds(450, 200, 100, 40);
-        comboBox2.setBounds(550, 200, 100, 40);
-        label2.setBounds(650, 200, 100, 40);
-        comboBox2.setBounds(750, 200, 100, 40);
-
-        comboBox1.addItem("SEK");
-        comboBox1.addItem("USD");
-        frame.add(comboBox1);
-        frame.add(label1);
-        frame.add(textField1);
-        frame.add(label2);
-        frame.add(comboBox2);
-
-        label1.setVisible(true);
-
-
-    }
-
-
-
 }
