@@ -2,9 +2,15 @@ import anotherPackage.ThreadClass;
 import justClasses.Product;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
+import java.lang.Package;
+import java.util.Arrays;
+import java.util.List;
+=======
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+>>>>>>> a671644017cc7e4367c72315e20a516ad6862c05
 
 
 public class Main extends ThreadClass {
@@ -28,6 +34,9 @@ public class Main extends ThreadClass {
         products.add(new Product(5, "Couch", 45));
         products.add(new Product(6, "Book", 1));
 
+        streamTester();
+
+    }
 
         List<Integer> listOfOnlyProductsUnder30kg = products.stream().filter(product -> product.getWeight() < 30).map(product -> product.getWeight()).toList();
 
@@ -58,6 +67,34 @@ public class Main extends ThreadClass {
                 .distinct()
                 .toList();
 
+<<<<<<< HEAD
+    public static void streamTester() {
+        List<Integer> intList = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
+
+        System.out.println(intList);
+
+        intList.stream().filter(i -> i < 5).filter(i -> i > 2).forEach(System.out::println);
+
+
+    }
+
+    public void readText() {
+        //
+//        GenericClass<Double, Integer> genericClass = new GenericClass(1.5, "hey", 1);
+//        genericClass.print();
+//
+//        ArrayList<AnotherClass> ab = new ArrayList<>();
+//        ab.add(new AnotherClass());
+//
+//
+//        shout("coool", 1, 2.0);
+//        shout(12, "nice", 5.0);
+//
+//        Path path = Path.of("C:\\Programming\\Java_fstetler\\Testing\\src\\main\\java\\textFolder\\text.txt");
+//
+//        System.out.println(shout("nice", 0, 30.0));
+=======
+>>>>>>> a671644017cc7e4367c72315e20a516ad6862c05
     }
 
     public static <k, v, s> v shout (k thingToShout, v otherThingToShout, s lastThing) {
@@ -67,5 +104,7 @@ public class Main extends ThreadClass {
 
         return otherThingToShout;
     }
+
+
 
 }
