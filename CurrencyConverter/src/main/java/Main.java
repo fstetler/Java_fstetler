@@ -2,8 +2,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -18,7 +16,6 @@ public class Main {
     static int numberOfCurrencies;
     static JsonNode jsonNode;
     static List<String> listOfCurrencies;
-
 
     public static String currencyExchangeFromUSD(String currency) {
         return jsonNode.get("data").get(currency).toString();
@@ -42,6 +39,7 @@ public class Main {
 
         JLabel amountLabel = new JLabel("Amount: ");
         amountLabel.setBounds(300, 200, 100, 40);
+        amountLabel.setVisible(true);
 
         JTextField inTextField = new JTextField();
         inTextField.setBounds(450, 200, 100, 40);
@@ -54,6 +52,7 @@ public class Main {
 
         JLabel convertedAmountLabel = new JLabel();
         convertedAmountLabel.setBounds(650, 200, 100, 40);
+        convertedAmountLabel.setVisible(true);
 
         JComboBox<String> toCurrencyCombobox = new JComboBox<>();
         toCurrencyCombobox.setBounds(750, 200, 100, 40);
@@ -88,11 +87,6 @@ public class Main {
         frame.add(convertedAmountLabel);
         frame.add(toCurrencyCombobox);
         frame.add(convertButton);
-
-
-
-        amountLabel.setVisible(true);
-
     }
 
     public static JsonNode getJsonNode() {
